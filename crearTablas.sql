@@ -7,10 +7,10 @@ DROP TABLE IF EXISTS prestacion;
 DROP TABLE IF EXISTS turno_prestacion;
 DROP TABLE IF EXISTS atencion_turno;
 
-create table paciente(nroDoc INT, nombre VARCHAR(50), apellido VARCHAR(50), tipoDoc VARCHAR(10),
+create table paciente(nroDoc INT NOT NULL, nombre VARCHAR(50), apellido VARCHAR(50), tipoDoc VARCHAR(10),
 fechaNac DATE, email VARCHAR(50), telefono VARCHAR(20), lugarNac VARCHAR(50));
 
-create table medico(nroDoc INT, nombre VARCHAR(50), apellido VARCHAR(50), tipoDoc VARCHAR(10),
+create table medico(nroDoc INT NOT NULL, nombre VARCHAR(50), apellido VARCHAR(50), tipoDoc VARCHAR(10),
 fechaNac DATE, email VARCHAR(50), telefono VARCHAR(20), lugarNac VARCHAR(50), matricula INT);
 
 create table turno(idTurno INTEGER, fecha DATE, hora TIME, descripcion VARCHAR(50), nroDoc INT, idPlan INT);
@@ -40,5 +40,9 @@ INSERT INTO paciente VALUES (31998654,'Juan Roman', 'Riquelme', 'DNI', '1984-11-
 INSERT INTO paciente VALUES (11289983,'Juan', 'Mansalva', 'DNI', '1968-02-18', 'jmansalva@gmail.com', '11-44411788', 'Balvanera C.A.B.A.');
 
 
+	/* INSERTAR MEDICOS */
 
-
+INSERT INTO medico VALUES (20987765,'Veronica', 'Duran', 'DNI', '1973-10-12', 'veronicaduran@gmail.com', '11-00006788', 'Palermo C.A.B.A.', 45321);
+INSERT INTO medico VALUES (32442786,'Cesar', 'Crespo', 'DNI', '1982-07-22', 'ccrespo@hotmail.com', '11-11006418', 'Avellaneda BS AS.', 42221);
+INSERT INTO medico VALUES (22987980,'Matias', 'Almeyda', 'DNI', '1978-11-12', 'matiasalmeyda@gmail.com', '11-22223248', 'La Playosa CBA.', 40091);
+INSERT INTO medico VALUES (25644324,'Julieta', 'Donovan', 'DNI', '1980-09-22', 'julidonovan@gmail.com', '11-31136688', 'Martinez BS AS.', 40009);
