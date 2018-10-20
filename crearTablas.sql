@@ -15,9 +15,9 @@ fechaNac DATE, email VARCHAR(50), telefono VARCHAR(20), lugarNac VARCHAR(50), ma
 
 create table turno(idTurno INTEGER, fecha DATE, hora TIME, descripcion VARCHAR(50), nroDoc INT, idPlan INT);
 
-create table plan(idPlan INT, nombre VARCHAR(50), idCobertura);
+create table plan(idPlan INT, nombre VARCHAR(50), idCobertura INT);
 
-create table cobertura(idCobertura INT, nombre VARCHAR(50), tipoCobertura);
+create table cobertura(idCobertura INT, nombre VARCHAR(50), tipoCobertura VARCHAR(50));
 
 create table prestacion(idPrestacion INT, nombre VARCHAR(50));
 
