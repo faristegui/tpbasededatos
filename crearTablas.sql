@@ -99,3 +99,46 @@ INSERT INTO medico VALUES (32442786,'Cesar', 'Crespo', 'DNI', '1982-07-22', 'ccr
 INSERT INTO medico VALUES (22987980,'Matias', 'Almeyda', 'DNI', '1978-11-12', 'matiasalmeyda@gmail.com', '11-22223248', 'La Playosa CBA.', 40091);
 INSERT INTO medico VALUES (25644324,'Julieta', 'Donovan', 'DNI', '1980-09-22', 'julidonovan@gmail.com', '11-31136688', 'Martinez BS AS.', 40009);
 INSERT INTO medico VALUES (15644324,'Josefina', 'Garcia', 'DNI', '1972-10-20', 'josefinagarcia10@gmail.com', '2355-45525', 'Carlos Tejedor BS AS.', 3002);
+
+	/* INSERTAR COBERTURAS */
+
+INSERT INTO cobertura VALUES (1,'Prepaga');
+INSERT INTO cobertura VALUES (2,'Obra Social');
+INSERT INTO cobertura VALUES (3,'Particular');
+
+	/* INSERTAR PLANES */
+
+INSERT INTO plan VALUES (1, 'Plan 310', 1);
+INSERT INTO plan VALUES (2, 'Plan 410', 1);
+INSERT INTO plan VALUES (3, 'Plan 510', 1);
+INSERT INTO plan VALUES (4, 'Plan Adulto', 1);
+INSERT INTO plan VALUES (5, 'Afiliado', 2);
+INSERT INTO plan VALUES (6, 'Familiar Afiliado', 2);
+INSERT INTO plan VALUES (7, 'Familiar Delegado', 2);
+INSERT INTO plan VALUES (8, 'Sin plan', 3);
+
+	/* AGREGAR TURNOS */ 
+
+turno(idTurno INT NOT NULL, fecha DATE, hora TIME, descripcion VARCHAR(50), nroDoc INT, idPlan INT,
+
+INSERT INTO turno VALUES (1, '2018-12-20', '10:00:00', 'Consulta general', 30786654, 2);
+INSERT INTO turno VALUES (2, '2019-01-05', '15:30:00', 'Cirugia Maxilar', 29887765, 4);
+INSERT INTO turno VALUES (3, '2018-11-05', '11:30:00', 'Extraccion pieza 25', 30786654, 2);
+INSERT INTO turno VALUES (4, '2019-10-01', '16:00:00', 'Pegado protesis', 31998654, 6);
+INSERT INTO turno VALUES (5, '2017-12-15', '09:30:00', 'Colocacion ortodoncia', 22745634, 3);
+INSERT INTO turno VALUES (6, '2018-10-25', '10:45:00', 'Extraccion', 28785694, 6);
+INSERT INTO turno VALUES (7, '2017-12-15', '11:00:00', 'Protesis', 34222111, 5);
+INSERT INTO turno VALUES (8, '2018-11-25', '09:30:00', 'Arreglo pieza 24', 28793654, 4);
+INSERT INTO turno VALUES (9, '2019-07-16', '19:00:00', 'Arreglo pieza 12', 10287889, 4);
+INSERT INTO turno VALUES (10, '2018-11-19', '15:30:00', 'Consulta general', 28785694, 6);
+INSERT INTO turno VALUES (11, '2019-02-17', '09:30:00', 'Limpieza general', 22745634, 3);
+
+	/* AGREGAR PRESTACIONES */
+
+INSERT INTO prestacion VALUES (1, 'Extraccion');
+INSERT INTO prestacion VALUES (3, 'Limpieza');
+INSERT INTO prestacion VALUES (4, 'Arreglo');
+INSERT INTO prestacion VALUES (5, 'Perno');
+INSERT INTO prestacion VALUES (6, 'Corona');
+INSERT INTO prestacion VALUES (7, 'Implante');
+INSERT INTO prestacion VALUES (8, 'Protesis');
