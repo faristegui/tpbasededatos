@@ -13,41 +13,68 @@ DROP TABLE IF EXISTS fichado_paciente;
 
 create table paciente(nroDoc INT NOT NULL, nombre VARCHAR(50), apellido VARCHAR(50), tipoDoc VARCHAR(10),
 fechaNac DATE, email VARCHAR(50), telefono VARCHAR(20), lugarNac VARCHAR(50),
-CONSTRAINT PK_paciente PRIMARY KEY (nroDoc));
+	CONSTRAINT PK_paciente PRIMARY KEY (nroDoc)
+);
 
 create table medico(nroDoc INT NOT NULL, nombre VARCHAR(50), apellido VARCHAR(50), tipoDoc VARCHAR(10),
 fechaNac DATE, email VARCHAR(50), telefono VARCHAR(20), lugarNac VARCHAR(50), matricula INT,
-CONSTRAINT PK_medico PRIMARY KEY (nroDoc));
-
-create table turno(idTurno INT NOT NULL, fecha DATE, hora TIME, descripcion VARCHAR(50), nroDoc INT, idPlan INT,
-CONSTRAINT PK_turno PRIMARY KEY (idTurno));
-
-create table plan(idPlan INT NOT NULL, nombre VARCHAR(50), idCobertura INT,
-CONSTRAINT PK_plan PRIMARY KEY (idPlan));
+	CONSTRAINT PK_medico PRIMARY KEY (nroDoc)
+);
 
 create table cobertura(idCobertura INT NOT NULL, nombre VARCHAR(50), tipoCobertura VARCHAR(50),
-CONSTRAINT PK_cobertura PRIMARY KEY (idCobertura));
+	CONSTRAINT PK_cobertura PRIMARY KEY (idCobertura)
+);
+
+create table plan(idPlan INT NOT NULL, nombre VARCHAR(50), idCobertura INT,
+	CONSTRAINT PK_plan PRIMARY KEY (idPlan),
+	CONSTRAINT FK_planCobertura FOREIGN KEY (idCobertura) REFERENCES cobertura(idCobertura)
+);
+
+create table turno(idTurno INT NOT NULL, fecha DATE, hora TIME, descripcion VARCHAR(50), nroDoc INT, idPlan INT,
+	CONSTRAINT PK_turno PRIMARY KEY (idTurno),
+	CONSTRAINT FK_turnoPaciente FOREIGN KEY (nroDoc) REFERENCES paciente(nroDoc),
+	CONSTRAINT FK_turnoPlan FOREIGN KEY (idPlan) REFERENCES plan(idPlan)
+);
 
 create table prestacion(idPrestacion INT NOT NULL, nombre VARCHAR(50),
-CONSTRAINT PK_prestacion PRIMARY KEY (idPrestacion));
+	CONSTRAINT PK_prestacion PRIMARY KEY (idPrestacion)
+);
 
 create table turno_prestacion(idTurno INT NOT NULL, idPrestacion INT,
-CONSTRAINT PK_turnoPrestacion PRIMARY KEY (idTurno,idPrestacion));
+	CONSTRAINT PK_turnoPrestacion PRIMARY KEY (idTurno,idPrestacion),
+	CONSTRAINT FK_turno FOREIGN KEY (idTurno) REFERENCES turno(idTurno),
+	CONSTRAINT FK_prestacion FOREIGN KEY (idPrestacion) REFERENCES prestacion(idPrestacion)
+);
 
 create table atencion_turno(nroDoc INT, idTurno INT,
-CONSTRAINT PK_atencionTurno PRIMARY KEY (nroDoc));
+	CONSTRAINT PK_atencionTurno PRIMARY KEY (nroDoc),
+	CONSTRAINT FK_turno FOREIGN KEY (idTurno) REFERENCES turno(idTurno),
+	CONSTRAINT FK_medico FOREIGN KEY (nroDoc) REFERENCES medico(nroDoc)
+);
 
 create table realiza_prestacion(nroDoc INT, idPrestacion INT, observaciones VARCHAR(100),
-CONSTRAINT PK_realizaPrestacion PRIMARY KEY (nroDoc, idPrestacion));
+	CONSTRAINT PK_realizaPrestacion PRIMARY KEY (nroDoc, idPrestacion),
+	CONSTRAINT FK_prestacion FOREIGN KEY (idPrestacion) REFERENCES prestacion(idPrestacion),
+	CONSTRAINT FK_medico FOREIGN KEY (nroDoc) REFERENCES medico(nroDoc)
+);
 
 create table plan_prestacion(idPlan INT, idPrestacion INT,
-CONSTRAINT PK_planPrestacion PRIMARY KEY (idPlan, idPrestacion));
+	CONSTRAINT PK_planPrestacion PRIMARY KEY (idPlan, idPrestacion),
+	CONSTRAINT FK_plan FOREIGN KEY (idPlan) REFERENCES plan(idPlan),
+	CONSTRAINT FK_prestacion FOREIGN KEY (idPrestacion) REFERENCES prestacion(idPrestacion)
+);
 
 create table paciente_plan(nroDoc INT, idPlan INT,
-CONSTRAINT PK_pacientePlan PRIMARY KEY (nroDoc, idPlan));
+	CONSTRAINT PK_pacientePlan PRIMARY KEY (nroDoc, idPlan),
+	CONSTRAINT FK_paciente FOREIGN KEY (nroDoc) REFERENCES paciente(nroDoc),
+	CONSTRAINT FK_plan FOREIGN KEY (idPlan) REFERENCES plan(idPlan)
+);
 
 create table fichado_paciente(nroDoc INT, nroDocMedico INT,
-CONSTRAINT PK_ficha PRIMARY KEY (nroDoc, nroDocMedico));
+	CONSTRAINT PK_ficha PRIMARY KEY (nroDoc, nroDocMedico),
+	CONSTRAINT FK_paciente FOREIGN KEY (nroDoc) REFERENCES paciente(nroDoc),
+	CONSTRAINT FK_medico FOREIGN KEY (nroDocMedico) REFERENCES medico(nroDoc)
+);
 
 
 
@@ -64,7 +91,6 @@ INSERT INTO paciente VALUES (34222111,'Claudia', 'Vieria', 'DNI', '1989-01-01', 
 INSERT INTO paciente VALUES (28785694,'Rodrigo', 'Mora', 'DNI', '1984-11-22', 'rmora@gmail.com', '11-44356788', 'Villa Crespo C.A.B.A.');
 INSERT INTO paciente VALUES (31998654,'Juan Roman', 'Riquelme', 'DNI', '1984-11-22', 'roman10@gmail.com', '11-66667788', 'Sarandi BS AS.');
 INSERT INTO paciente VALUES (11289983,'Juan', 'Mansalva', 'DNI', '1968-02-18', 'jmansalva@gmail.com', '11-44411788', 'Balvanera C.A.B.A.');
-
 
 	/* INSERTAR MEDICOS */
 
