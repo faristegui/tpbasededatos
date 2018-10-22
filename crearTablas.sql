@@ -119,8 +119,6 @@ INSERT INTO plan VALUES (8, 'Sin plan', 3);
 
 	/* AGREGAR TURNOS */ 
 
-turno(idTurno INT NOT NULL, fecha DATE, hora TIME, descripcion VARCHAR(50), nroDoc INT, idPlan INT,
-
 INSERT INTO turno VALUES (1, '2018-12-20', '10:00:00', 'Consulta general', 30786654, 2);
 INSERT INTO turno VALUES (2, '2019-01-05', '15:30:00', 'Cirugia Maxilar', 29887765, 4);
 INSERT INTO turno VALUES (3, '2018-11-05', '11:30:00', 'Extraccion pieza 25', 30786654, 2);
@@ -132,6 +130,8 @@ INSERT INTO turno VALUES (8, '2018-11-25', '09:30:00', 'Arreglo pieza 24', 28793
 INSERT INTO turno VALUES (9, '2019-07-16', '19:00:00', 'Arreglo pieza 12', 10287889, 4);
 INSERT INTO turno VALUES (10, '2018-11-19', '15:30:00', 'Consulta general', 28785694, 6);
 INSERT INTO turno VALUES (11, '2019-02-17', '09:30:00', 'Limpieza general', 22745634, 3);
+INSERT INTO turno VALUES (12, '2019-02-17', '10:30:00', 'Cementado corona', 31998654, 6);
+INSERT INTO turno VALUES (13, '2019-03-11', '17:45:00', 'Ortodoncia', 30786654, 8);
 
 	/* AGREGAR PRESTACIONES */
 
