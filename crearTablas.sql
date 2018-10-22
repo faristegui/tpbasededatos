@@ -124,7 +124,7 @@ turno(idTurno INT NOT NULL, fecha DATE, hora TIME, descripcion VARCHAR(50), nroD
 INSERT INTO turno VALUES (1, '2018-12-20', '10:00:00', 'Consulta general', 30786654, 2);
 INSERT INTO turno VALUES (2, '2019-01-05', '15:30:00', 'Cirugia Maxilar', 29887765, 4);
 INSERT INTO turno VALUES (3, '2018-11-05', '11:30:00', 'Extraccion pieza 25', 30786654, 2);
-INSERT INTO turno VALUES (4, '2019-10-01', '16:00:00', 'Pegado protesis', 31998654, 6);
+INSERT INTO turno VALUES (4, '2019-10-01', '16:00:00', 'Cementar corona', 31998654, 6);
 INSERT INTO turno VALUES (5, '2017-12-15', '09:30:00', 'Colocacion ortodoncia', 22745634, 3);
 INSERT INTO turno VALUES (6, '2018-10-25', '10:45:00', 'Extraccion', 28785694, 6);
 INSERT INTO turno VALUES (7, '2017-12-15', '11:00:00', 'Protesis', 34222111, 5);
@@ -142,3 +142,19 @@ INSERT INTO prestacion VALUES (5, 'Perno');
 INSERT INTO prestacion VALUES (6, 'Corona');
 INSERT INTO prestacion VALUES (7, 'Implante');
 INSERT INTO prestacion VALUES (8, 'Protesis');
+INSERT INTO prestacion VALUES (9, 'Ortodoncia');
+INSERT INTO prestacion VALUES (10, 'Consulta general');
+INSERT INTO prestacion VALUES (11, 'Cirugia');
+INSERT INTO prestacion VALUES (12, 'Blanqueamiento');
+
+	/* AGREGAR TURNOS Y PRESTACIONES */
+
+INSERT INTO turno_prestacion VALUES (1,10);
+INSERT INTO turno_prestacion VALUES (2,11);
+INSERT INTO turno_prestacion VALUES (3,1);
+INSERT INTO turno_prestacion VALUES (4,8);
+INSERT INTO turno_prestacion VALUES (5,9);
+INSERT INTO turno_prestacion VALUES (5,9);
+INSERT INTO turno_prestacion VALUES (8,4);
+INSERT INTO turno_prestacion VALUES (9,9);
+INSERT INTO turno_prestacion VALUES (10,10);
