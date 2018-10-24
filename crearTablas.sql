@@ -1,16 +1,7 @@
-DROP TABLE IF EXISTS paciente;
-DROP TABLE IF EXISTS medico;
-DROP TABLE IF EXISTS agenda_medico;
-DROP TABLE IF EXISTS turno;
-DROP TABLE IF EXISTS plan;
-DROP TABLE IF EXISTS cobertura;
-DROP TABLE IF EXISTS prestacion;
-DROP TABLE IF EXISTS turno_prestacion;
-DROP TABLE IF EXISTS atencion_turno;
-DROP TABLE IF EXISTS realiza_prestacion;
-DROP TABLE IF EXISTS plan_prestacion;
-DROP TABLE IF EXISTS paciente_plan;
-DROP TABLE IF EXISTS fichado_paciente;
+DROP DATABASE IF EXISTS tp_db;
+CREATE DATABASE tp_db;
+
+USE tp_db;
 
 create table paciente(nroDoc INT NOT NULL, nombre VARCHAR(50), apellido VARCHAR(50), tipoDoc VARCHAR(10),
 fechaNac DATE, email VARCHAR(50), telefono VARCHAR(20), lugarNac VARCHAR(50),
@@ -22,12 +13,12 @@ fechaNac DATE, email VARCHAR(50), telefono VARCHAR(20), lugarNac VARCHAR(50), ma
 	CONSTRAINT PK_medico PRIMARY KEY (nroDoc)
 );
 
-create table agenda_medico(matricula INT, idAgenda INT, fecha DATE,  horaDesde TIME,  horaHasta TIME,
-        CONSTRAINT PK_agenda PRIMARY KEY (idAgenda)
-	CONSTRAINT FK_agendaMedico FOREIGN KEY (matricula) REFERENCES medico(matricula)
+create table agenda_medico(nroDoc INT, idAgenda INT, fecha DATE,  horaDesde TIME,  horaHasta TIME,
+        CONSTRAINT PK_agenda PRIMARY KEY (idAgenda),
+	CONSTRAINT FK_agendaMedico FOREIGN KEY (nroDoc) REFERENCES medico(nroDoc)
 );
 
-create table cobertura(idCobertura INT NOT NULL, nombre VARCHAR(50), tipoCobertura VARCHAR(50),
+create table cobertura(idCobertura INT NOT NULL, nombre VARCHAR(50),
 	CONSTRAINT PK_cobertura PRIMARY KEY (idCobertura)
 );
 
@@ -48,7 +39,7 @@ create table prestacion(idPrestacion INT NOT NULL, nombre VARCHAR(50),
 
 create table turno_prestacion(idTurno INT NOT NULL, idPrestacion INT,
 	CONSTRAINT PK_turnoPrestacion PRIMARY KEY (idTurno,idPrestacion),
-	CONSTRAINT FK_turno FOREIGN KEY (idTurno) REFERENCES turno(idTurno),
+	CONSTRAINT FK_turno_prestacion FOREIGN KEY (idTurno) REFERENCES turno(idTurno),
 	CONSTRAINT FK_prestacion FOREIGN KEY (idPrestacion) REFERENCES prestacion(idPrestacion)
 );
 
@@ -60,26 +51,26 @@ create table atencion_turno(nroDoc INT, idTurno INT,
 
 create table realiza_prestacion(nroDoc INT, idPrestacion INT, observaciones VARCHAR(100),
 	CONSTRAINT PK_realizaPrestacion PRIMARY KEY (nroDoc, idPrestacion),
-	CONSTRAINT FK_prestacion FOREIGN KEY (idPrestacion) REFERENCES prestacion(idPrestacion),
-	CONSTRAINT FK_medico FOREIGN KEY (nroDoc) REFERENCES medico(nroDoc)
+	CONSTRAINT FK_realiza_prestacion FOREIGN KEY (idPrestacion) REFERENCES prestacion(idPrestacion),
+	CONSTRAINT FK_medico_prestacion FOREIGN KEY (nroDoc) REFERENCES medico(nroDoc)
 );
 
 create table plan_prestacion(idPlan INT, idPrestacion INT,
 	CONSTRAINT PK_planPrestacion PRIMARY KEY (idPlan, idPrestacion),
 	CONSTRAINT FK_plan FOREIGN KEY (idPlan) REFERENCES plan(idPlan),
-	CONSTRAINT FK_prestacion FOREIGN KEY (idPrestacion) REFERENCES prestacion(idPrestacion)
+	CONSTRAINT FK_plan_prestacion FOREIGN KEY (idPrestacion) REFERENCES prestacion(idPrestacion)
 );
 
 create table paciente_plan(nroDoc INT, idPlan INT,
 	CONSTRAINT PK_pacientePlan PRIMARY KEY (nroDoc, idPlan),
 	CONSTRAINT FK_paciente FOREIGN KEY (nroDoc) REFERENCES paciente(nroDoc),
-	CONSTRAINT FK_plan FOREIGN KEY (idPlan) REFERENCES plan(idPlan)
+	CONSTRAINT FK_paciente_plan FOREIGN KEY (idPlan) REFERENCES plan(idPlan)
 );
 
 create table fichado_paciente(nroDoc INT, nroDocMedico INT,
 	CONSTRAINT PK_ficha PRIMARY KEY (nroDoc, nroDocMedico),
-	CONSTRAINT FK_paciente FOREIGN KEY (nroDoc) REFERENCES paciente(nroDoc),
-	CONSTRAINT FK_medico FOREIGN KEY (nroDocMedico) REFERENCES medico(nroDoc)
+	CONSTRAINT FK_ficha_paciente FOREIGN KEY (nroDoc) REFERENCES paciente(nroDoc),
+	CONSTRAINT FK_paciente_medico FOREIGN KEY (nroDocMedico) REFERENCES medico(nroDoc)
 );
 
 
@@ -159,7 +150,6 @@ INSERT INTO turno_prestacion VALUES (1,10);
 INSERT INTO turno_prestacion VALUES (2,11);
 INSERT INTO turno_prestacion VALUES (3,1);
 INSERT INTO turno_prestacion VALUES (4,8);
-INSERT INTO turno_prestacion VALUES (5,9);
 INSERT INTO turno_prestacion VALUES (5,9);
 INSERT INTO turno_prestacion VALUES (8,4);
 INSERT INTO turno_prestacion VALUES (9,9);
