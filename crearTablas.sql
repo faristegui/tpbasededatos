@@ -21,6 +21,11 @@ fechaNac DATE, email VARCHAR(50), telefono VARCHAR(20), lugarNac VARCHAR(50), ma
 	CONSTRAINT PK_medico PRIMARY KEY (nroDoc)
 );
 
+create table agenda_medico(matricula INT, idAgenda INT, fecha DATE,  horaDesde TIME,  horaHasta TIME,
+        CONSTRAINT PK_agenda PRIMARY KEY (idAgenda)
+	CONSTRAINT FK_agendaMedico FOREIGN KEY (matricula) REFERENCES medico(matricula)
+);
+
 create table cobertura(idCobertura INT NOT NULL, nombre VARCHAR(50), tipoCobertura VARCHAR(50),
 	CONSTRAINT PK_cobertura PRIMARY KEY (idCobertura)
 );
