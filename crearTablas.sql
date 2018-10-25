@@ -129,6 +129,26 @@ INSERT INTO turno VALUES (10, '2018-11-19', '15:30:00', 'Consulta general', 2878
 INSERT INTO turno VALUES (11, '2019-02-17', '09:30:00', 'Limpieza general', 22745634, 3);
 INSERT INTO turno VALUES (12, '2019-02-17', '10:30:00', 'Cementado corona', 31998654, 6);
 INSERT INTO turno VALUES (13, '2019-03-11', '17:45:00', 'Ortodoncia', 30786654, 8);
+INSERT INTO turno VALUES (14, '2018-10-21', '13:00:00', 'Consulta Ortodoncia', 34222111, 5);
+INSERT INTO turno VALUES (15, '2019-05-22', '10:00:00', 'Consulta', 22745634, 3);
+INSERT INTO turno VALUES (16, '2018-05-22', '10:00:00', 'Consulta', 22745634, 3);
+INSERT INTO turno VALUES (17, '2016-04-21', '16:00:00', 'Consulta Extraccion', 31998654, 6);
+INSERT INTO turno VALUES (18, '2017-07-25', '15:45:00', 'Consulta', 34752654, 3);
+INSERT INTO turno VALUES (19, '2015-10-20', '13:30:00', 'Extraccion', 29887765, 4);
+INSERT INTO turno VALUES (20, '2017-08-25', '15:45:00', 'Colocacion Perno', 29887765, 4);
+INSERT INTO turno VALUES (21, '2018-04-30', '15:45:00', 'Consulta Protesis', 28785694, 6);
+INSERT INTO turno VALUES (22, '2019-07-20', '15:45:00', 'Consulta', 34222111, 5);
+INSERT INTO turno VALUES (23, '2015-08-18', '15:45:00', 'Consulta ortodoncia', 22745634, 3);
+INSERT INTO turno VALUES (24, '2014-11-28', '15:45:00', 'Consulta ortodoncia', 22745634, 3);
+INSERT INTO turno VALUES (25, '2017-12-27', '09:30:00', 'Limpieza general', 22745634, 3);
+INSERT INTO turno VALUES (26, '2018-07-20', '09:30:00', 'Arreglo pieza 24', 28793654, 4);
+INSERT INTO turno VALUES (27, '2019-11-15', '16:45:00', 'Cementar corona 24', 31998654, 6);
+INSERT INTO turno VALUES (28, '2013-12-17', '09:30:00', 'Limpieza general', 22745634, 3);
+INSERT INTO turno VALUES (29, '2018-10-25', '10:00:00', 'Extraccion pieza 5', 28785694, 6);
+INSERT INTO turno VALUES (30, '2017-11-15', '11:30:00', 'Consulta Protesis', 34222111, 5);
+INSERT INTO turno VALUES (31, '2018-10-20', '09:30:00', 'Arreglo pieza 20 y 22', 28793654, 4);
+INSERT INTO turno VALUES (32, '2016-05-21', '13:30:00', 'Extraccion pieza 13', 29887765, 4);
+INSERT INTO turno VALUES (33, '2016-08-22', '12:45:00', 'Colocacion Perno pieza 20', 29887765, 4);
 
 	/* AGREGAR PRESTACIONES */
 
