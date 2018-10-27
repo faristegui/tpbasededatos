@@ -1,82 +1,4 @@
-DROP DATABASE IF EXISTS tp_db;
-CREATE DATABASE tp_db;
-
-USE tp_db;
-
-create table paciente(nroDoc INT NOT NULL, nombre VARCHAR(50), apellido VARCHAR(50), tipoDoc VARCHAR(10),
-fechaNac DATE, email VARCHAR(50), telefono VARCHAR(20), lugarNac VARCHAR(50),
-	CONSTRAINT PK_paciente PRIMARY KEY (nroDoc)
-);
-
-create table medico(nroDoc INT NOT NULL, nombre VARCHAR(50), apellido VARCHAR(50), tipoDoc VARCHAR(10),
-fechaNac DATE, email VARCHAR(50), telefono VARCHAR(20), lugarNac VARCHAR(50), matricula INT,
-	CONSTRAINT PK_medico PRIMARY KEY (nroDoc)
-);
-
-create table agenda_medico(nroDoc INT, idAgenda INT, fecha DATE,  horaDesde TIME,  horaHasta TIME,
-        CONSTRAINT PK_agenda PRIMARY KEY (idAgenda),
-	CONSTRAINT FK_agendaMedico FOREIGN KEY (nroDoc) REFERENCES medico(nroDoc)
-);
-
-create table cobertura(idCobertura INT NOT NULL, nombre VARCHAR(50),
-	CONSTRAINT PK_cobertura PRIMARY KEY (idCobertura)
-);
-
-create table plan(idPlan INT NOT NULL, nombre VARCHAR(50), idCobertura INT,
-	CONSTRAINT PK_plan PRIMARY KEY (idPlan),
-	CONSTRAINT FK_planCobertura FOREIGN KEY (idCobertura) REFERENCES cobertura(idCobertura)
-);
-
-create table turno(idTurno INT NOT NULL, fecha DATE, hora TIME, descripcion VARCHAR(50), nroDoc INT, idPlan INT,
-	CONSTRAINT PK_turno PRIMARY KEY (idTurno),
-	CONSTRAINT FK_turnoPaciente FOREIGN KEY (nroDoc) REFERENCES paciente(nroDoc),
-	CONSTRAINT FK_turnoPlan FOREIGN KEY (idPlan) REFERENCES plan(idPlan)
-);
-
-create table prestacion(idPrestacion INT NOT NULL, nombre VARCHAR(50),
-	CONSTRAINT PK_prestacion PRIMARY KEY (idPrestacion)
-);
-
-create table turno_prestacion(idTurno INT NOT NULL, idPrestacion INT,
-	CONSTRAINT PK_turnoPrestacion PRIMARY KEY (idTurno,idPrestacion),
-	CONSTRAINT FK_turno_prestacion FOREIGN KEY (idTurno) REFERENCES turno(idTurno),
-	CONSTRAINT FK_prestacion FOREIGN KEY (idPrestacion) REFERENCES prestacion(idPrestacion)
-);
-
-create table atencion_turno(nroDoc INT, idTurno INT,
-	CONSTRAINT PK_atencionTurno PRIMARY KEY (nroDoc),
-	CONSTRAINT FK_turno FOREIGN KEY (idTurno) REFERENCES turno(idTurno),
-	CONSTRAINT FK_medico FOREIGN KEY (nroDoc) REFERENCES medico(nroDoc)
-);
-
-create table realiza_prestacion(nroDoc INT, idPrestacion INT, observaciones VARCHAR(100),
-	CONSTRAINT PK_realizaPrestacion PRIMARY KEY (nroDoc, idPrestacion),
-	CONSTRAINT FK_realiza_prestacion FOREIGN KEY (idPrestacion) REFERENCES prestacion(idPrestacion),
-	CONSTRAINT FK_medico_prestacion FOREIGN KEY (nroDoc) REFERENCES medico(nroDoc)
-);
-
-create table plan_prestacion(idPlan INT, idPrestacion INT,
-	CONSTRAINT PK_planPrestacion PRIMARY KEY (idPlan, idPrestacion),
-	CONSTRAINT FK_plan FOREIGN KEY (idPlan) REFERENCES plan(idPlan),
-	CONSTRAINT FK_plan_prestacion FOREIGN KEY (idPrestacion) REFERENCES prestacion(idPrestacion)
-);
-
-create table paciente_plan(nroDoc INT, idPlan INT,
-	CONSTRAINT PK_pacientePlan PRIMARY KEY (nroDoc, idPlan),
-	CONSTRAINT FK_paciente FOREIGN KEY (nroDoc) REFERENCES paciente(nroDoc),
-	CONSTRAINT FK_paciente_plan FOREIGN KEY (idPlan) REFERENCES plan(idPlan)
-);
-
-create table fichado_paciente(nroDoc INT, nroDocMedico INT,
-	CONSTRAINT PK_ficha PRIMARY KEY (nroDoc, nroDocMedico),
-	CONSTRAINT FK_ficha_paciente FOREIGN KEY (nroDoc) REFERENCES paciente(nroDoc),
-	CONSTRAINT FK_paciente_medico FOREIGN KEY (nroDocMedico) REFERENCES medico(nroDoc)
-);
-
-
-
 	/* INSERTAR PACIENTES */
-
 INSERT INTO paciente VALUES (30786654,'Raul', 'Maidana', 'DNI', '1983-10-12', 'raulm@gmail.com', '11-45657788', 'C.A.B.A.');
 INSERT INTO paciente VALUES (32786111,'Josefina', 'Martinez', 'DNI', '1985-03-01', 'josemartinez@gmail.com', '11-00997766', 'Martinez. BS AS.');
 INSERT INTO paciente VALUES (22745634,'Carlos', 'Bianchi', 'DNI', '1973-11-03', 'carlosbianchi@gmail.com', '11-00887766', 'Palermo C.A.B.A.');
@@ -90,7 +12,6 @@ INSERT INTO paciente VALUES (31998654,'Juan Roman', 'Riquelme', 'DNI', '1984-11-
 INSERT INTO paciente VALUES (11289983,'Juan', 'Mansalva', 'DNI', '1968-02-18', 'jmansalva@gmail.com', '11-44411788', 'Balvanera C.A.B.A.');
 
 	/* INSERTAR MEDICOS */
-
 INSERT INTO medico VALUES (20987765,'Veronica', 'Duran', 'DNI', '1973-10-12', 'veronicaduran@gmail.com', '11-00006788', 'Palermo C.A.B.A.', 45321);
 INSERT INTO medico VALUES (32442786,'Cesar', 'Crespo', 'DNI', '1982-07-22', 'ccrespo@hotmail.com', '11-11006418', 'Avellaneda BS AS.', 42221);
 INSERT INTO medico VALUES (22987980,'Matias', 'Almeyda', 'DNI', '1978-11-12', 'matiasalmeyda@gmail.com', '11-22223248', 'La Playosa CBA.', 40091);
@@ -98,13 +19,11 @@ INSERT INTO medico VALUES (25644324,'Julieta', 'Donovan', 'DNI', '1980-09-22', '
 INSERT INTO medico VALUES (15644324,'Josefina', 'Garcia', 'DNI', '1972-10-20', 'josefinagarcia10@gmail.com', '2355-45525', 'Carlos Tejedor BS AS.', 3002);
 
 	/* INSERTAR COBERTURAS */
-
 INSERT INTO cobertura VALUES (1,'Prepaga');
 INSERT INTO cobertura VALUES (2,'Obra Social');
 INSERT INTO cobertura VALUES (3,'Particular');
 
 	/* INSERTAR PLANES */
-
 INSERT INTO plan VALUES (1, 'Plan 310', 1);
 INSERT INTO plan VALUES (2, 'Plan 410', 1);
 INSERT INTO plan VALUES (3, 'Plan 510', 1);
@@ -115,7 +34,6 @@ INSERT INTO plan VALUES (7, 'Familiar Delegado', 2);
 INSERT INTO plan VALUES (8, 'Sin plan', 3);
 
 	/* AGREGAR TURNOS */ 
-
 INSERT INTO turno VALUES (1, '2018-12-20', '10:00:00', 'Consulta general', 30786654, 2);
 INSERT INTO turno VALUES (2, '2019-01-05', '15:30:00', 'Cirugia Maxilar', 29887765, 4);
 INSERT INTO turno VALUES (3, '2018-11-05', '11:30:00', 'Extraccion pieza 25', 30786654, 2);
@@ -151,9 +69,9 @@ INSERT INTO turno VALUES (32, '2016-05-21', '13:30:00', 'Extraccion pieza 13', 2
 INSERT INTO turno VALUES (33, '2016-08-22', '12:45:00', 'Colocacion Perno pieza 20', 29887765, 4);
 
 	/* AGREGAR PRESTACIONES */
-
 INSERT INTO prestacion VALUES (1, 'Extraccion');
-INSERT INTO prestacion VALUES (3, 'Limpieza');
+INSERT INTO prestacion VALUES (2, 'Limpieza');
+INSERT INTO prestacion VALUES (3, 'Blanqueamiento');
 INSERT INTO prestacion VALUES (4, 'Arreglo');
 INSERT INTO prestacion VALUES (5, 'Perno');
 INSERT INTO prestacion VALUES (6, 'Corona');
@@ -162,10 +80,8 @@ INSERT INTO prestacion VALUES (8, 'Protesis');
 INSERT INTO prestacion VALUES (9, 'Ortodoncia');
 INSERT INTO prestacion VALUES (10, 'Consulta general');
 INSERT INTO prestacion VALUES (11, 'Cirugia');
-INSERT INTO prestacion VALUES (12, 'Blanqueamiento');
 
 	/* AGREGAR TURNOS Y PRESTACIONES */
-
 INSERT INTO turno_prestacion VALUES (1,10);
 INSERT INTO turno_prestacion VALUES (2,11);
 INSERT INTO turno_prestacion VALUES (3,1);
@@ -174,3 +90,27 @@ INSERT INTO turno_prestacion VALUES (5,9);
 INSERT INTO turno_prestacion VALUES (8,4);
 INSERT INTO turno_prestacion VALUES (9,9);
 INSERT INTO turno_prestacion VALUES (10,10);
+
+	/* REALIZA TURNOS MED-PRESTACION */
+INSERT INTO realiza_prestacion VALUES (20987765,1, 'Me gusta sacar dientes');
+INSERT INTO realiza_prestacion VALUES (32442786,2, 'Limpio todo');
+INSERT INTO realiza_prestacion VALUES (22987980,3, 'Blanco como el agua');
+INSERT INTO realiza_prestacion VALUES (25644324,4, 'Soy bueno arreglando');
+INSERT INTO realiza_prestacion VALUES (15644324,5, 'Colocacion de pernos');
+INSERT INTO realiza_prestacion VALUES (20987765,6, 'hay coronas');
+INSERT INTO realiza_prestacion VALUES (32442786,7, 'te hacemos Implante');
+INSERT INTO realiza_prestacion VALUES (22987980,8, 'colocamos Protesis');
+INSERT INTO realiza_prestacion VALUES (20987765,9, 'hacemos ortodoncia');
+INSERT INTO realiza_prestacion VALUES (15644324,10, 'veni y contame');
+INSERT INTO realiza_prestacion VALUES (15644324,11, 'hago cirugia');
+
+	/* ATENCION TURNOS MED-PACIENTE */
+INSERT INTO atencion_turno VALUES (20987765,13);
+INSERT INTO atencion_turno VALUES (20987765,14);
+INSERT INTO atencion_turno VALUES (20987765,32);
+INSERT INTO atencion_turno VALUES (32442786,20);
+INSERT INTO atencion_turno VALUES (32442786,5);
+INSERT INTO atencion_turno VALUES (32442786,33);
+INSERT INTO atencion_turno VALUES (15644324,16);
+INSERT INTO atencion_turno VALUES (15644324,15);
+INSERT INTO atencion_turno VALUES (15644324,1);
