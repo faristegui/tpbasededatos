@@ -1,8 +1,6 @@
 DROP DATABASE IF EXISTS tp_db;
 CREATE DATABASE tp_db;
 
-USE tp_db;
-
 create table paciente(nroDoc INT NOT NULL, nombre VARCHAR(50), apellido VARCHAR(50), tipoDoc VARCHAR(10),
 fechaNac DATE, email VARCHAR(50), telefono VARCHAR(20), lugarNac VARCHAR(50),
 	CONSTRAINT PK_paciente PRIMARY KEY (nroDoc)
@@ -14,7 +12,7 @@ fechaNac DATE, email VARCHAR(50), telefono VARCHAR(20), lugarNac VARCHAR(50), ma
 );
 
 create table agenda_medico(nroDoc INT, idAgenda INT, fecha DATE,  horaDesde TIME,  horaHasta TIME,
-        CONSTRAINT PK_agenda PRIMARY KEY (idAgenda),
+    CONSTRAINT PK_agenda PRIMARY KEY (idAgenda),
 	CONSTRAINT FK_agendaMedico FOREIGN KEY (nroDoc) REFERENCES medico(nroDoc)
 );
 
