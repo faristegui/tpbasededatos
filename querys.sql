@@ -1,4 +1,4 @@
-/* 1- Consultar los turnos disponibles de X médico con Y obra social (del cliente) y con una desde-hasta fecha.*/
+/* 1- Consultar los turnos disponibles de X médico, con una desde-hasta fecha y una prestacion determinada.*/
 
 SELECT CONCAT(m.nombre, ' ' , m.apellido) as medico, am.fecha as dia, CONCAT(am.horaDesde, '-' , am.horaHasta) as hora_turno
 FROM medico m, agenda_medico am, realiza_prestacion rp, prestacion p
