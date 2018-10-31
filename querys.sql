@@ -28,7 +28,7 @@ OFFSET 0 ROWS FETCH FIRST 10 ROWS ONLY;
 
 /* 3- Para cada año, devolver el plan que más cantidad de turnos tuvo asignados */
 
-SELECT w.anio, p.nombre, w.idplan, COUNT(w.idturno) AS cantidad 
+SELECT w.anio, p.nombre
 FROM turno_anio AS w JOIN plan p ON p.idplan = w.idplan
 GROUP BY w.anio, w.idplan,p.nombre
 HAVING COUNT(idturno) >= (
