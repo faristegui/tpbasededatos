@@ -25,3 +25,16 @@ AND atur.idTurno = t.idTurno
 AND t.nroDoc = p.nroDoc
 AND t.idPlan = pl.idPlan
 OFFSET 0 ROWS FETCH FIRST 10 ROWS ONLY;
+
+/* 3- Para cada año, devolver el plan que más cantidad de turnos tuvo asignados */
+
+SELECT w.anio, p.nombre, w.idplan, COUNT(w.idturno) AS cantidad 
+FROM turno_anio AS w JOIN plan p ON p.idplan = w.idplan
+GROUP BY w.anio, w.idplan,p.nombre
+HAVING COUNT(idturno) >= (
+	SELECT max(cantidad) FROM (
+		SELECT anio, idplan, COUNT(idturno) AS cantidad FROM turno_anio
+		GROUP BY anio, idplan
+	) AS t WHERE t.anio = w.anio
+)
+ORDER BY w.anio
