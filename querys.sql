@@ -37,4 +37,4 @@ HAVING COUNT(idturno) >= (
 		GROUP BY anio, idplan
 	) AS t WHERE t.anio = w.anio
 )
-ORDER BY w.anio
+ORDER BY w.anio;
