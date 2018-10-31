@@ -71,8 +71,5 @@ create table fichado_paciente(nroDoc INT, nroDocMedico INT,
 	CONSTRAINT FK_paciente_medico FOREIGN KEY (nroDocMedico) REFERENCES medico(nroDoc)
 );
 
-create or REPLACE VIEW public.turno_anio as 
-select date_part('year'::text, turno.fecha) as anio,
-    turno.idplan,
-    turno.idturno
-   from turno;
+create or replace view turno_anio as 
+select date_part('year'::text, turno.fecha) as anio, turno.idplan, turno.idturno from turno;
